@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
 
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.hilt.navigation.compose)
 
     implementation(project(":core:designsystem"))
     implementation(project(":data:movies"))
@@ -55,4 +56,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    debugImplementation(libs.androidx.compose.ui.tooling)
+
 }
