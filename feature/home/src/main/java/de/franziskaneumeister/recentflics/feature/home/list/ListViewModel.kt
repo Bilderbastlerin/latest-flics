@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
@@ -21,14 +20,7 @@ internal class ListViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val movies: Flow<Map<String, Int>> by lazy {
-        flowOf(
-            mapOf(
-                "foo" to 1,
-                "bar" to 2,
-                "lorem" to 3,
-                "ipsum" to 4
-            )
-        )
+        movieRepository.loadMovies()
     }
 
     val uiState: StateFlow<ListUiState> = movies
