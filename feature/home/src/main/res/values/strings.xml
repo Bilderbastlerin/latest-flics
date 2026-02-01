@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_movie_list">Latest movies</string>
-    <string name="text_loading_message">Waiting for items to load from the backend</string>
+    <string name="text_loading_message">Waiting for movies to load …</string>
+    <string name="error_message_inital_load">Sorry, we could not load the movies :(</string>
+    <string name="text_inline_error_message">Something went wrong while loading more movies :(</string>
+    <string name="label_retry">Retry</string>
 </resources>

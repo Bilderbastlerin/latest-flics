@@ -11,6 +11,6 @@ internal data object ListDestination
 internal fun NavGraphBuilder.listScreen() {
     composable<ListDestination> {
         val viewModel = hiltViewModel<ListViewModel>()
-        ListScreen(viewModel)
+        ListScreen(viewModel, { TODO("navigate to movie")})
     }
 }

@@ -53,6 +53,7 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.hilt.navigation.compose)
+    implementation(project(":core:types"))
     ksp(libs.hilt.compiler)
 
     implementation(project(":core:designsystem"))
