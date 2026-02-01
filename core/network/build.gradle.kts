@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.ksp)
@@ -14,6 +16,16 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        val secretsFile = rootProject.file("local.properties")
+        val properties = Properties()
+        properties.load(secretsFile.inputStream())
+        val apiKey = properties.getProperty("api_key") ?: ""
+        buildConfigField(
+            type = "String",
+            name = "API_KEY",
+            value = apiKey
+        )
     }
 
     buildTypes {
@@ -31,6 +43,9 @@ android {
     }
     kotlin {
         explicitApi()
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 

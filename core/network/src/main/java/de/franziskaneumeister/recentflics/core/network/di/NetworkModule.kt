@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import de.franziskaneumeister.recentflics.core.network.BuildConfig
 import info.movito.themoviedbapi.TmdbApi
 import javax.inject.Singleton
 
@@ -17,7 +18,7 @@ public abstract class DataModule {
         @Singleton
         internal fun providesTmdbApi(): TmdbApi {
             return TmdbApi(
-                "some api key"
+                BuildConfig.API_KEY
             )
 
         }
