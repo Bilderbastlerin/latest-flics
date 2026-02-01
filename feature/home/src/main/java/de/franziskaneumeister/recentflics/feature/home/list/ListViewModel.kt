@@ -6,15 +6,12 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
+import androidx.paging.map
 import dagger.hilt.android.lifecycle.HiltViewModel
+import de.franziskaneumeister.recentflics.core.types.entities.MovieId
 import de.franziskaneumeister.recentflics.data.movies.MovieRepository
-import de.franziskaneumeister.recentflics.data.movies.entities.Movie
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,9 +29,14 @@ internal class ListViewModel @Inject constructor(
         pagingSourceFactory = { movieRepository.moviesForPager }
     )
     public val uiState = pager.flow
+        .map { pagingData ->
+            pagingData.map {
+                ListEntry(id = it.id, title = it.title, releaseDate = it.releaseDate)
+            }
+        }
         .cachedIn(viewModelScope)
 
-//    val uiState: StateFlow<ListUiState> = movies
+    //    val uiState: StateFlow<ListUiState> = movies
 //        .map { movies ->
 //            movies.map { ListEntry(it.title, it.id.toString()) }
 //        }
@@ -56,8 +58,9 @@ internal class ListViewModel @Inject constructor(
 //        data class Success(val data: List<ListEntry>) : ListUiState
 //    }
 //
-//    data class ListEntry(
-//        val name: String,
-//        val id: String,
-//    )
+    data class ListEntry(
+        val title: String,
+        val releaseDate: LocalDate,
+        val id: MovieId,
+    )
 }

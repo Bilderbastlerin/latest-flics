@@ -27,8 +27,8 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import de.franziskaneumeister.recentflics.core.designsystem.theme.AppTheme
 import de.franziskaneumeister.recentflics.core.types.entities.MovieId
-import de.franziskaneumeister.recentflics.data.movies.entities.Movie
 import de.franziskaneumeister.recentflics.feature.home.R
+import de.franziskaneumeister.recentflics.feature.home.list.ListViewModel.ListEntry
 import kotlinx.coroutines.flow.flowOf
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -36,13 +36,13 @@ import java.time.format.FormatStyle
 
 @Composable
 internal fun ListScreen(viewModel: ListViewModel, goToMovie: (MovieId) -> Unit) {
-    val lazyPagingItems: LazyPagingItems<Movie> = viewModel.uiState.collectAsLazyPagingItems()
+    val lazyPagingItems: LazyPagingItems<ListEntry> = viewModel.uiState.collectAsLazyPagingItems()
     ListScreen(lazyPagingItems, goToMovie)
 }
 
 @Composable
 private fun ListScreen(
-    lazyPagingItems: LazyPagingItems<Movie>,
+    lazyPagingItems: LazyPagingItems<ListEntry>,
     goToMovie: (MovieId) -> Unit
 ) {
     Scaffold { paddingValues ->
@@ -137,7 +137,7 @@ private fun LoadingOverlay(modifier: Modifier) {
 @Composable
 private fun InlineErrorMessage(
     modifier: Modifier,
-    lazyPagingItems: LazyPagingItems<Movie>
+    lazyPagingItems: LazyPagingItems<ListEntry>
 ) {
     Box(modifier) {
         Column(
@@ -167,7 +167,7 @@ private fun ErrorMessage(modifier: Modifier) {
 @Composable
 private fun MovieRow(
     modifier: Modifier = Modifier,
-    movie: Movie,
+    movie: ListEntry,
     goToMovie: (MovieId) -> Unit,
 ) {
     Card(
@@ -206,7 +206,7 @@ private fun PreviewListScreen() {
             lazyPagingItems = flowOf(
                 PagingData.from(
                     listOf(
-                        Movie(1, "Hello World", LocalDate.now(), "")
+                        ListViewModel.ListEntry(id =1, title = "Hello World", releaseDate =  LocalDate.now())
                     )
                 )
             ).collectAsLazyPagingItems(),
