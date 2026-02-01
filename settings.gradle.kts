@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Recent Flics"
 include(":app")
 include(":core:desingsystem")
+include(":core:network")
