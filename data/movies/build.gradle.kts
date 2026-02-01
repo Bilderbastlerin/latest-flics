@@ -36,9 +36,11 @@ android {
 
 dependencies {
     implementation(project(":core:network"))
+    implementation(project(":core:types"))
+
+    implementation(libs.androidx.paging.runtime)
 
     implementation(libs.hilt.android)
-    implementation(project(":core:types"))
     ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)

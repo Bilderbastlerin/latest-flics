@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_movie_list">Latest movies</string>
+    <string name="text_loading_message">Waiting for items to load from the backend</string>
+</resources>

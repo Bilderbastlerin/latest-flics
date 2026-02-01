@@ -3,6 +3,7 @@
 package de.franziskaneumeister.recentflics.core.network.model
 
 import de.franziskaneumeister.recentflics.core.network.LocalDateSerializer
+import de.franziskaneumeister.recentflics.core.types.entities.ApiPage
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -15,6 +16,6 @@ public data class PagedResponse(
     public val totalResults: Int,
     @SerialName("total_pages")
     public val totalPages: Int,
-    public val page: Int,
+    public val page: ApiPage,
     public val results: List<MovieApiModel>
 )
