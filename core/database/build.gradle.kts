@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "de.franziskaneumeister.recentflics.data.movies"
+    namespace = "de.franziskaneumeister.recentflics.core.database"
     compileSdk {
         version = release(36)
     }
@@ -32,14 +32,19 @@ android {
     kotlin {
         explicitApi()
     }
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
 }
 
 dependencies {
-    implementation(project(":core:network"))
-    implementation(project(":core:database"))
     implementation(project(":core:types"))
 
-    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    implementation(libs.androidx.room.paging)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
