@@ -16,10 +16,10 @@ internal class MoviePagingSource @Inject constructor(
             val pagedResponse = moviesDataSource.getMovies(nextPageNumber)
             return LoadResult.Page(
                 data = pagedResponse.results.map { model -> model.toEntity() },
-                prevKey = null,
-                nextKey = if (pagedResponse.totalPages < nextPageNumber) nextPageNumber + 1 else null
+                prevKey = if (nextPageNumber > 1) nextPageNumber - 1 else null,
+                nextKey =  if (nextPageNumber < pagedResponse.totalPages) nextPageNumber + 1 else null
             )
-        } catch (e: Exception){
+        } catch (e: Exception) {
             return LoadResult.Error(e)
         }
     }

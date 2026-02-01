@@ -26,13 +26,15 @@ internal class ListViewModel @Inject constructor(
     private val pager = Pager(
         PagingConfig(
             pageSize = 20,
-            enablePlaceholders = false
+            enablePlaceholders = false,
+            prefetchDistance = 1,
+            initialLoadSize = 20,
         ),
         initialKey = 1,
         pagingSourceFactory = { movieRepository.moviesForPager }
     )
     public val uiState = pager.flow
-        .cachedIn(viewModelScope)
+        //.cachedIn(viewModelScope)
 
 //    val uiState: StateFlow<ListUiState> = movies
 //        .map { movies ->
