@@ -39,6 +39,11 @@ android {
     }
 }
 
+hilt {
+    enableExperimentalClasspathAggregation = true
+    enableAggregatingTask = true
+}
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -53,11 +58,11 @@ dependencies {
 
     // Hilt Dependency Injection
     implementation(libs.hilt.android)
-    implementation(project(":core:types"))
     ksp(libs.hilt.compiler)
 
     implementation(project(":core:designsystem"))
     implementation(project(":feature:home"))
+    implementation(project(":core:types"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

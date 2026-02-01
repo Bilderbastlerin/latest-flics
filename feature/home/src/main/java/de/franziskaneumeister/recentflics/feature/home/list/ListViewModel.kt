@@ -1,5 +1,6 @@
 package de.franziskaneumeister.recentflics.feature.home.list
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,16 +15,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class ListViewModel @Inject constructor(
+    handle: SavedStateHandle,
 ) : ViewModel() {
 
-    private val movies: Flow<Map<String, Int>> = flowOf(
-        mapOf(
-            "foo" to 1,
-            "bar" to 2,
-            "lorem" to 3,
-            "ipsum" to 4
+    private val movies: Flow<Map<String, Int>> by lazy {
+        flowOf(
+            mapOf(
+                "foo" to 1,
+                "bar" to 2,
+                "lorem" to 3,
+                "ipsum" to 4
+            )
         )
-    )
+    }
 
     val uiState: StateFlow<ListUiState> = movies
         .map { movies ->
