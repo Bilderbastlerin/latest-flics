@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "de.franziskaneumeister.recentflics.designsystem"
+    namespace = "de.franziskaneumeister.recentflics.core.designsystem"
     compileSdk {
         version = release(36)
     }

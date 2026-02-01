@@ -1,4 +1,4 @@
-package de.franziskaneumeister.recentflics.designsystem
+package de.franziskaneumeister.recentflics.core.designsystem
 
 import org.junit.Test
 
