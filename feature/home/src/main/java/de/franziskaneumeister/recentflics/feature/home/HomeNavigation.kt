@@ -1,12 +1,16 @@
 package de.franziskaneumeister.recentflics.feature.home
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
+import de.franziskaneumeister.recentflics.feature.home.list.ListDestination
 import de.franziskaneumeister.recentflics.feature.home.list.listScreen
+import kotlinx.serialization.Serializable
 
-public fun NavGraphBuilder.homeSection(navController: NavController): Unit {
-    navigation("list", "home") {
+@Serializable
+public data object HomeDestination
+
+public fun NavGraphBuilder.homeSection() {
+    navigation<HomeDestination>(startDestination = ListDestination ) {
         listScreen()
     }
 }
