@@ -53,6 +53,7 @@ dependencies {
 
     // Hilt Dependency Injection
     implementation(libs.hilt.android)
+    implementation(project(":core:types"))
     ksp(libs.hilt.compiler)
 
     implementation(project(":core:designsystem"))

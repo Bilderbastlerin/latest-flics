@@ -1,23 +1,26 @@
 package de.franziskaneumeister.recentflics.core.network
 
+import de.franziskaneumeister.recentflics.core.types.IODispatcher
 import info.movito.themoviedbapi.TmdbApi
 import info.movito.themoviedbapi.model.movielists.MovieResultsPageWithDates
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
+import javax.inject.Singleton
 
+@Singleton
 public class TmdbDataSource @Inject internal constructor(
     private val api: TmdbApi,
-  //  private val context: CoroutineContext
+    @param:IODispatcher private val dispatcher: CoroutineDispatcher
 ) {
 
     public suspend fun loadMovies(page: Int = 1): Unit {
-    //    withContext(context) {
-        val nowPlaying: MovieResultsPageWithDates = api.movieLists.getNowPlaying(
-            "en-US",
-            page,
-            "US"
-        )
-        //  }
+        withContext(dispatcher) {
+            val nowPlaying: MovieResultsPageWithDates = api.movieLists.getNowPlaying(
+                "en-US",
+                page,
+                "US"
+            )
+        }
     }
 }
