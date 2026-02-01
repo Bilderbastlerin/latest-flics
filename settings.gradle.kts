@@ -23,3 +23,4 @@ rootProject.name = "Recent Flics"
 include(":app")
 include(":core:designsystem")
 include(":core:network")
+include(":data:movies")

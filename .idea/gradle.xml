@@ -13,7 +13,8 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/designsystem" />
             <option value="$PROJECT_DIR$/core/network" />
-            <option value="$PROJECT_DIR$/movies" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/movies" />
           </set>
         </option>
       </GradleProjectSettings>
