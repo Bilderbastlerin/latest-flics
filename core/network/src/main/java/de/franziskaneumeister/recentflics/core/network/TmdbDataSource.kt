@@ -1,6 +1,6 @@
 package de.franziskaneumeister.recentflics.core.network
 
-import de.franziskaneumeister.recentflics.core.types.IODispatcher
+import de.franziskaneumeister.recentflics.core.types.di.IODispatcher
 import info.movito.themoviedbapi.TmdbApi
 import info.movito.themoviedbapi.model.movielists.MovieResultsPageWithDates
 import kotlinx.coroutines.CoroutineDispatcher

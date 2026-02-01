@@ -1,4 +1,4 @@
-package de.franziskaneumeister.recentflics.core.types
+package de.franziskaneumeister.recentflics.core.types.di
 
 import javax.inject.Qualifier
 
