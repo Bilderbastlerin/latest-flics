@@ -1,8 +1,12 @@
+@file:UseSerializers(LocalDateSerializer::class)
+
 package de.franziskaneumeister.recentflics.core.network.model
 
+import de.franziskaneumeister.recentflics.core.network.LocalDateSerializer
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
 
 @InternalSerializationApi
 @Serializable
