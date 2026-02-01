@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import de.franziskaneumeister.recentflics.data.movies.MovieRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -16,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 internal class ListViewModel @Inject constructor(
     handle: SavedStateHandle,
+    private val movieRepository: MovieRepository
 ) : ViewModel() {
 
     private val movies: Flow<Map<String, Int>> by lazy {

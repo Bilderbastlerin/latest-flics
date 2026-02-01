@@ -50,8 +50,8 @@ android {
 }
 
 dependencies {
-    implementation(libs.hilt.android)
     implementation(project(":core:types"))
+    implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.conoregan.themoviedbapi)
     testImplementation(libs.junit)
