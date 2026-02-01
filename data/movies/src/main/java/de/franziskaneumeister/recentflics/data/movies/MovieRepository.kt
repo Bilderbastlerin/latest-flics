@@ -1,12 +1,15 @@
 package de.franziskaneumeister.recentflics.data.movies
 
+import de.franziskaneumeister.recentflics.core.network.MoviesDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-public class MovieRepository @Inject internal constructor() {
+public class MovieRepository @Inject internal constructor(
+    private val dataSource: MoviesDataSource
+) {
 
     public fun loadMovies(): Flow<Map<String, Int>> {
         return flowOf(
