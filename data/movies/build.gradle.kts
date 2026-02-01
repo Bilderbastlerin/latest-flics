@@ -34,6 +34,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:network"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
