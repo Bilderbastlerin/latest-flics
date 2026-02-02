@@ -12,6 +12,8 @@ import de.franziskaneumeister.recentflics.core.database.MovieDao
 import de.franziskaneumeister.recentflics.core.database.models.MovieDbModel
 import de.franziskaneumeister.recentflics.core.network.model.MovieApiModel
 import de.franziskaneumeister.recentflics.core.types.entities.ApiPage
+import de.franziskaneumeister.recentflics.core.types.entities.MovieId
+import de.franziskaneumeister.recentflics.core.types.utils.suspendRunCatching
 import de.franziskaneumeister.recentflics.data.movies.entities.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -42,6 +44,12 @@ public class MovieRepository @Inject internal constructor(
                 it.toEntity()
             }
         }
+
+    public suspend fun getMovie(movieId: MovieId): Result<Movie> {
+        return suspendRunCatching {
+            movieDao.findMovie(movieId)
+        }.map { it.toEntity() }
+    }
 
     private companion object {
         private const val PAGE_SIZE = 20

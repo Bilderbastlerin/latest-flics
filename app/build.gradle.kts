@@ -62,6 +62,7 @@ dependencies {
 
     implementation(project(":core:designsystem"))
     implementation(project(":feature:home"))
+    implementation(project(":feature:movie"))
     implementation(project(":core:types"))
 
     testImplementation(libs.junit)

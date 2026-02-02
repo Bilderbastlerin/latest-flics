@@ -37,6 +37,9 @@ android {
     buildFeatures {
         compose = true
     }
+    composeCompiler {
+        stabilityConfigurationFiles.add( rootProject.layout.projectDirectory.file("stability_config.conf"))
+    }
 }
 
 dependencies {
@@ -51,6 +54,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons)
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.hilt.navigation.compose)

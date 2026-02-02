@@ -13,11 +13,9 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
@@ -26,13 +24,12 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import de.franziskaneumeister.recentflics.core.designsystem.theme.AppTheme
+import de.franziskaneumeister.recentflics.core.designsystem.theme.utils.formatDate
 import de.franziskaneumeister.recentflics.core.types.entities.MovieId
 import de.franziskaneumeister.recentflics.feature.home.R
 import de.franziskaneumeister.recentflics.feature.home.list.ListViewModel.ListEntry
 import kotlinx.coroutines.flow.flowOf
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 
 @Composable
 internal fun ListScreen(viewModel: ListViewModel, goToMovie: (MovieId) -> Unit) {
@@ -182,20 +179,6 @@ private fun MovieRow(
             Text(movie.releaseDate.formatDate())
         }
     }
-}
-
-@Composable
-@ReadOnlyComposable
-private fun LocalDate.formatDate(): String {
-    return format(
-        DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
-            .withLocale(
-                java.util.Locale(
-                    Locale.current.language,
-                    Locale.current.region
-                )
-            )
-    )
 }
 
 @Preview

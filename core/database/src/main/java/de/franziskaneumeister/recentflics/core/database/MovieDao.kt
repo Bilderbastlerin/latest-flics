@@ -18,4 +18,7 @@ public interface MovieDao {
 
     @Query("DELETE FROM movies")
     public suspend fun clearAll()
+
+    @Query("SELECT * FROM movies WHERE id = :movieId LIMIT 1")
+    public suspend fun findMovie(movieId: MovieId): MovieDbModel
 }
