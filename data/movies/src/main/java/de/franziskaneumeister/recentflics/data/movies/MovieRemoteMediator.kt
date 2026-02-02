@@ -21,7 +21,7 @@ internal class MovieRemoteMediator @Inject constructor(
     private val networkService: MoviesDataSource
 ) : RemoteMediator<MovieId, MovieDbModel>() {
 
-    private var nextPage = 1
+    private var remoteKey = 1
 
     override suspend fun load(
         loadType: LoadType,
@@ -29,7 +29,7 @@ internal class MovieRemoteMediator @Inject constructor(
     ): MediatorResult {
         return try {
             val nextPage = when (loadType) {
-                LoadType.REFRESH -> nextPage
+                LoadType.REFRESH -> 1
                 LoadType.PREPEND ->
                     return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
@@ -39,8 +39,7 @@ internal class MovieRemoteMediator @Inject constructor(
                             endOfPaginationReached = true
                         )
                     }
-                    nextPage += 1
-                    nextPage
+                    remoteKey + 1
                 }
             }
 
@@ -49,10 +48,12 @@ internal class MovieRemoteMediator @Inject constructor(
             transactionHandler.performTransaction {
                 if (loadType == LoadType.REFRESH) {
                     movieDao.clearAll()
+                    remoteKey = 1
                 }
 
                 val movieDbModels = response.results.map { it.toDbModel() }
                 movieDao.insertAll(movieDbModels)
+                remoteKey = nextPage
             }
 
             MediatorResult.Success(
@@ -66,7 +67,7 @@ internal class MovieRemoteMediator @Inject constructor(
     }
 
     override suspend fun initialize(): InitializeAction {
-        return InitializeAction.LAUNCH_INITIAL_REFRESH // always refresh the cash at the start of the app
+        return InitializeAction.LAUNCH_INITIAL_REFRESH // always refresh the cache at the start of the app
     }
 }
 
