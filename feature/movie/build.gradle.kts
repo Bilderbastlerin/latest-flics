@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "de.franziskaneumeister.recentflics.feature.home"
+    namespace = "de.franziskaneumeister.recentflics.feature.movie"
     compileSdk {
         version = release(36)
     }
@@ -52,9 +52,6 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
 
-    implementation(libs.androidx.paging.compose)
-    implementation(libs.androidx.paging.runtime)
-
     implementation(libs.androidx.navigation.compose)
     implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
@@ -63,6 +60,4 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    debugImplementation(libs.androidx.compose.ui.tooling)
-
-}
+    debugImplementation(libs.androidx.compose.ui.tooling)}
