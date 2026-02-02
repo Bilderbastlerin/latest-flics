@@ -9,4 +9,5 @@ import de.franziskaneumeister.recentflics.core.database.models.MovieDbModel
 @TypeConverters(Converters::class)
 internal abstract class AppDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
+
 }

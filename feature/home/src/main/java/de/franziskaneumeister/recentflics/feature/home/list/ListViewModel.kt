@@ -28,7 +28,7 @@ internal class ListViewModel @Inject constructor(
         initialKey = 1,
         pagingSourceFactory = { movieRepository.moviesForPager }
     )
-    public val uiState = pager.flow
+    public val uiState = movieRepository.moviesPager
         .map { pagingData ->
             pagingData.map {
                 ListEntry(id = it.id, title = it.title, releaseDate = it.releaseDate)
