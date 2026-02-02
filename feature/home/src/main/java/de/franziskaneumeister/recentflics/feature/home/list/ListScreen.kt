@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package de.franziskaneumeister.recentflics.feature.home.list
 
 import androidx.compose.foundation.layout.Arrangement
@@ -7,11 +9,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,18 +47,20 @@ private fun ListScreen(
     lazyPagingItems: LazyPagingItems<ListEntry>,
     goToMovie: (MovieId) -> Unit
 ) {
-    Scaffold { paddingValues ->
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(stringResource(R.string.title_movie_list))
+                },
+            )
+        },
+    ) { paddingValues ->
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = paddingValues,
+            state = rememberLazyListState()
         ) {
-            stickyHeader {
-                Column {
-                    Spacer(Modifier.padding(top = paddingValues.calculateTopPadding()))
-                    Text(stringResource(R.string.title_movie_list))
-                }
-            }
-
             items(
                 lazyPagingItems.itemCount,
                 key = lazyPagingItems.itemKey { it.id }
@@ -112,7 +119,7 @@ private fun InlineLoadingIndicator(modifier: Modifier) {
     Box(
         modifier.padding(16.dp)
     ) {
-        CircularProgressIndicator()
+        CircularProgressIndicator(Modifier.align(Alignment.Center))
     }
 }
 
