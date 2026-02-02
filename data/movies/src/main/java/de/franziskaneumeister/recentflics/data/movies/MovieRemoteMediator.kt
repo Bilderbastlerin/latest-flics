@@ -12,7 +12,9 @@ import de.franziskaneumeister.recentflics.core.database.models.MovieDbModel
 import de.franziskaneumeister.recentflics.core.datastore.SettingsDataSource
 import de.franziskaneumeister.recentflics.core.network.MoviesDataSource
 import de.franziskaneumeister.recentflics.core.network.model.MovieApiModel
+import de.franziskaneumeister.recentflics.core.types.entities.ApiPage
 import de.franziskaneumeister.recentflics.core.types.entities.MovieId
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
@@ -23,7 +25,6 @@ internal class MovieRemoteMediator @Inject constructor(
     private val settingsDataSource: SettingsDataSource
 ) : RemoteMediator<MovieId, MovieDbModel>() {
 
-    private var remoteKey = 1
 
     override suspend fun load(
         loadType: LoadType,
@@ -41,7 +42,7 @@ internal class MovieRemoteMediator @Inject constructor(
                             endOfPaginationReached = true
                         )
                     }
-                    remoteKey + 1
+                    getNextApiPageKey() + 1
                 }
             }
 
@@ -50,21 +51,29 @@ internal class MovieRemoteMediator @Inject constructor(
             transactionHandler.performTransaction {
                 if (loadType == LoadType.REFRESH) {
                     movieDao.clearAll()
-                    remoteKey = 1
+                    setNextApiPageKey(1)
                 }
 
                 val movieDbModels = response.results.map { it.toDbModel() }
                 movieDao.insertAll(movieDbModels)
-                remoteKey = nextPage
+                setNextApiPageKey(nextPage)
             }
 
             MediatorResult.Success(
-                endOfPaginationReached = false //nextPage >= response.totalPages
+                endOfPaginationReached = nextPage >= response.totalPages
             )
         } catch (e: CancellationException) {
             throw e
         } catch (e: Throwable) {
             MediatorResult.Error(e)
+        }
+    }
+
+    private suspend fun getNextApiPageKey(): ApiPage = settingsDataSource.settings.first().nextPage
+
+    private suspend fun setNextApiPageKey(page: ApiPage) {
+        settingsDataSource.updateSettings {
+            it.copy(nextPage = page)
         }
     }
 
