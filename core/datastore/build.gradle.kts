@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "de.franziskaneumeister.recentflics.data.movies"
+    namespace = "de.franziskaneumeister.recentflics.core.datastore"
     compileSdk {
         version = release(36)
     }
@@ -35,14 +36,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:network"))
-    implementation(project(":core:database"))
-    implementation(project(":core:datastore"))
-    implementation(project(":core:types"))
-
-    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.datastore)
+    implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.hilt.android)
+    implementation(project(":core:types"))
     ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)

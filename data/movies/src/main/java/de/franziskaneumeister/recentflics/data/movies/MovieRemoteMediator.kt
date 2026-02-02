@@ -9,6 +9,7 @@ import androidx.paging.RemoteMediator
 import de.franziskaneumeister.recentflics.core.database.MovieDao
 import de.franziskaneumeister.recentflics.core.database.TransactionHandler
 import de.franziskaneumeister.recentflics.core.database.models.MovieDbModel
+import de.franziskaneumeister.recentflics.core.datastore.SettingsDataSource
 import de.franziskaneumeister.recentflics.core.network.MoviesDataSource
 import de.franziskaneumeister.recentflics.core.network.model.MovieApiModel
 import de.franziskaneumeister.recentflics.core.types.entities.MovieId
@@ -18,7 +19,8 @@ import kotlin.coroutines.cancellation.CancellationException
 internal class MovieRemoteMediator @Inject constructor(
     private val movieDao: MovieDao,
     private val transactionHandler: TransactionHandler,
-    private val networkService: MoviesDataSource
+    private val networkService: MoviesDataSource,
+    private val settingsDataSource: SettingsDataSource
 ) : RemoteMediator<MovieId, MovieDbModel>() {
 
     private var remoteKey = 1

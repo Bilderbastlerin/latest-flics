@@ -17,6 +17,7 @@ kotlinxSerialization = "1.10.0"
 okhttp = "5.3.2"
 paging = "3.4.0"
 androidxRoom = "2.8.4"
+datastore = "1.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -47,6 +48,7 @@ androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref =
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidxRoom" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidxRoom" }
 androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "androidxRoom" }
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore"}
 
 
 [plugins]

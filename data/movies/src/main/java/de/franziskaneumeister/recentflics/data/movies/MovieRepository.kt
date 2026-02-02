@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
+
 @Singleton
 public class MovieRepository @Inject internal constructor(
     private val moviePagingSource: MoviePagingSource,
@@ -28,7 +29,7 @@ public class MovieRepository @Inject internal constructor(
         get() = moviePagingSource
 
     public val moviesPager: Flow<PagingData<Movie>> = Pager(
-        config = PagingConfig(pageSize = 20),
+        config = PagingConfig(pageSize = PAGE_SIZE),
         remoteMediator = remoteMediator,
         initialKey = 1,
         pagingSourceFactory = {
@@ -36,9 +37,15 @@ public class MovieRepository @Inject internal constructor(
         }
     )
         .flow
-        .map { pagingData -> pagingData.map {
-            it.toEntity()
-        } }
+        .map { pagingData ->
+            pagingData.map {
+                it.toEntity()
+            }
+        }
+
+    private companion object {
+        private const val PAGE_SIZE = 20
+    }
 }
 
 internal fun MovieApiModel.toEntity(): Movie {
