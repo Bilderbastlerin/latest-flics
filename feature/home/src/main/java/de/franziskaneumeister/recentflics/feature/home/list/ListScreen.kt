@@ -73,13 +73,13 @@ private fun ListScreen(
 
             when (lazyPagingItems.loadState.refresh) {
                 LoadState.Loading -> {
-                    item {
+                    item(key = "Loading Overlay") {
                         LoadingOverlay(Modifier.fillParentMaxSize())
                     }
                 }
 
                 is LoadState.Error -> {
-                    item {
+                    item(key = "Error Message") {
                         ErrorMessage(Modifier.fillParentMaxSize())
                     }
                 }
@@ -89,13 +89,13 @@ private fun ListScreen(
 
             when (lazyPagingItems.loadState.append) {
                 is LoadState.Error -> {
-                    item {
+                    item(key = "Inline Error Message") {
                         InlineErrorMessage(Modifier.fillParentMaxWidth(), lazyPagingItems)
                     }
                 }
 
                 LoadState.Loading -> {
-                    item {
+                    item(key = "Inline loading indicator") {
                         InlineLoadingIndicator(Modifier.fillParentMaxWidth())
                     }
                 }
@@ -103,7 +103,7 @@ private fun ListScreen(
                 else -> {}
             }
 
-            item {
+            item(key = "bottom inset") {
                 Spacer(Modifier.padding(paddingValues.calculateBottomPadding()))
             }
         }
