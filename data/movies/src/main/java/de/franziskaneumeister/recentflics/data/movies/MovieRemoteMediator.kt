@@ -81,13 +81,3 @@ internal class MovieRemoteMediator @Inject constructor(
         return InitializeAction.LAUNCH_INITIAL_REFRESH // always refresh the cache at the start of the app
     }
 }
-
-private fun MovieApiModel.toDbModel(): MovieDbModel {
-    return MovieDbModel(
-        id = this.id,
-        title = this.title,
-        releaseDate = this.releaseDate,
-        overview = this.overview,
-        popularity = this.popularity
-    )
-}

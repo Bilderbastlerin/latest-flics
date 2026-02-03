@@ -63,6 +63,7 @@ private fun ListScreen(
         ) {
             items(
                 lazyPagingItems.itemCount,
+                // could lead to crash because sometimes the api puts a movie on 2 pages…
                 key = lazyPagingItems.itemKey { it.id }
             ) { index ->
                 val movie = lazyPagingItems[index]
