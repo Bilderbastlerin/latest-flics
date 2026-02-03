@@ -32,6 +32,9 @@ android {
     buildFeatures {
         compose = true
     }
+    kotlin {
+        explicitApi()
+    }
 
 }
 

@@ -14,7 +14,7 @@ public class SettingsDataSource
 ) {
     public val settings: Flow<Settings> = dataStore.data
 
-    public suspend fun updateSettings(block: (Settings) -> Settings): Unit {
+    public suspend fun updateSettings(block: (Settings) -> Settings) {
         dataStore.updateData {
             block(it)
         }
