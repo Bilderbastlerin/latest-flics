@@ -7,6 +7,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import java.time.LocalDate
+import java.time.format.DateTimeParseException
 
 internal object LocalDateSerializer : KSerializer<LocalDate> {
     override val descriptor: SerialDescriptor =
@@ -20,7 +21,11 @@ internal object LocalDateSerializer : KSerializer<LocalDate> {
     }
 
     override fun deserialize(decoder: Decoder): LocalDate {
-        return LocalDate.parse(decoder.decodeString())
+        return try {
+            LocalDate.parse(decoder.decodeString())
+        } catch (e: DateTimeParseException) {
+            LocalDate.of(1900, 1, 1)
+        }
     }
 
 }
