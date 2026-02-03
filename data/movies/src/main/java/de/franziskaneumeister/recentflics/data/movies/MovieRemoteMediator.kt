@@ -11,7 +11,6 @@ import de.franziskaneumeister.recentflics.core.database.TransactionHandler
 import de.franziskaneumeister.recentflics.core.database.models.MovieDbModel
 import de.franziskaneumeister.recentflics.core.datastore.SettingsDataSource
 import de.franziskaneumeister.recentflics.core.network.MoviesDataSource
-import de.franziskaneumeister.recentflics.core.network.model.MovieApiModel
 import de.franziskaneumeister.recentflics.core.types.entities.ApiPage
 import de.franziskaneumeister.recentflics.core.types.entities.MovieId
 import kotlinx.coroutines.flow.first

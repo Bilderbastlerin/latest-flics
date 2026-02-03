@@ -23,7 +23,7 @@ internal object LocalDateSerializer : KSerializer<LocalDate> {
     override fun deserialize(decoder: Decoder): LocalDate {
         return try {
             LocalDate.parse(decoder.decodeString())
-        } catch (e: DateTimeParseException) {
+        } catch (_: DateTimeParseException) {
             LocalDate.of(1900, 1, 1)
         }
     }

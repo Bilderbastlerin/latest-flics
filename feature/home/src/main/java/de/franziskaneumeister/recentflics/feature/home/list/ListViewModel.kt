@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 internal class ListViewModel @Inject constructor(
     handle: SavedStateHandle,
-    private val movieRepository: MovieRepository
+    movieRepository: MovieRepository
 ) : ViewModel() {
     val uiState = movieRepository.moviesPager
         .map { pagingData ->

@@ -197,7 +197,7 @@ private fun PreviewListScreen() {
             lazyPagingItems = flowOf(
                 PagingData.from(
                     listOf(
-                        ListViewModel.ListEntry(id =1, title = "Hello World", releaseDate =  LocalDate.now())
+                        ListEntry(id =1, title = "Hello World", releaseDate =  LocalDate.now())
                     )
                 )
             ).collectAsLazyPagingItems(),
