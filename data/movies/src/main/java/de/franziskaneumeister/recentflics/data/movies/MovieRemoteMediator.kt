@@ -87,6 +87,7 @@ private fun MovieApiModel.toDbModel(): MovieDbModel {
         id = this.id,
         title = this.title,
         releaseDate = this.releaseDate,
-        overview = this.overview
+        overview = this.overview,
+        popularity = this.popularity
     )
 }

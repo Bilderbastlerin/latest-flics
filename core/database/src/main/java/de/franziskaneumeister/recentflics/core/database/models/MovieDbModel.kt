@@ -13,4 +13,5 @@ public data class MovieDbModel(
     val title: String,
     val releaseDate: LocalDate,
     val overview: String,
+    val popularity: Float
 )

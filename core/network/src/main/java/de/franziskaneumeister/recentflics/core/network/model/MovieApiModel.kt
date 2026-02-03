@@ -17,5 +17,6 @@ public data class MovieApiModel(
     public val title: String,
     @SerialName("release_date")
     public val releaseDate: LocalDate,
-    public val overview: String
+    public val overview: String,
+    public val popularity: Float
 )
