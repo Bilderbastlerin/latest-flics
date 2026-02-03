@@ -26,7 +26,7 @@ internal class MoviePagingSource @Inject constructor(
             return LoadResult.Page(
                 data = movies,
                 prevKey = if (nextPageNumber > 1) nextPageNumber - 1 else null,
-                nextKey =  if (nextPageNumber < pagedResponse.totalPages) nextPageNumber + 1 else null
+                nextKey = if (nextPageNumber < pagedResponse.totalPages) nextPageNumber + 1 else null
             )
         } catch (e: Exception) {
             return LoadResult.Error(e)

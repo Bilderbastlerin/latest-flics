@@ -28,7 +28,6 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemKey
 import de.franziskaneumeister.recentflics.core.designsystem.theme.AppTheme
 import de.franziskaneumeister.recentflics.core.designsystem.theme.utils.formatDate
 import de.franziskaneumeister.recentflics.core.types.entities.MovieId
@@ -64,8 +63,8 @@ private fun ListScreen(
         ) {
             items(
                 lazyPagingItems.itemCount,
-                // could lead to crash because sometimes the api puts a movie on 2 pages…
-                key = lazyPagingItems.itemKey { it.id }
+                // can't use keys here because sometimes the api puts the same movie on 2 pages
+                // key = lazyPagingItems.itemKey { it.id }
             ) { index ->
                 val movie = lazyPagingItems[index]
                 if (movie != null) {
