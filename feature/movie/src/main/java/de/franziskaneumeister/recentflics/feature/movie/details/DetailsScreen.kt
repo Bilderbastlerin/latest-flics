@@ -4,7 +4,9 @@ package de.franziskaneumeister.recentflics.feature.movie.details
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -15,6 +17,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -111,8 +114,9 @@ private fun MovieDetails(
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 16.dp)
     ) {
-        Text(releaseDate.formatDate())
-        Text(text)
+        Text(releaseDate.formatDate(), style = MaterialTheme.typography.labelMedium)
+        Spacer(Modifier.height(16.dp))
+        Text(text, style = MaterialTheme.typography.bodyLarge)
     }
 }
 

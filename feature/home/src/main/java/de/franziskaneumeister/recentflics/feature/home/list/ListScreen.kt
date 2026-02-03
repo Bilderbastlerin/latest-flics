@@ -14,6 +14,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -136,6 +137,7 @@ private fun LoadingOverlay(modifier: Modifier) {
             Modifier.align(Alignment.Center),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
             Text(
                 text = stringResource(R.string.text_loading_message),
             )
@@ -151,7 +153,9 @@ private fun InlineErrorMessage(
 ) {
     Box(modifier) {
         Column(
-            Modifier.padding(16.dp).align(Alignment.Center),
+            Modifier
+                .padding(16.dp)
+                .align(Alignment.Center),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(stringResource(R.string.text_inline_error_message))
@@ -195,8 +199,14 @@ private fun MovieRow(
             modifier = Modifier.padding(8.dp),
             verticalArrangement = Arrangement.Center
         ) {
-            Text(movie.title)
-            Text(movie.releaseDate.formatDate())
+            Text(
+                text = movie.title,
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Text(
+                text = movie.releaseDate.formatDate(),
+                style = MaterialTheme.typography.bodySmall
+            )
         }
     }
 }
