@@ -85,7 +85,9 @@ private fun ListScreen(
 
                 is LoadState.Error -> {
                     item(key = "Error Message") {
-                        ErrorMessage(Modifier.fillParentMaxSize())
+                        ErrorMessage(
+                            Modifier.fillParentMaxSize(),
+                            retry = { lazyPagingItems.retry() })
                     }
                 }
 
@@ -95,7 +97,10 @@ private fun ListScreen(
             when (lazyPagingItems.loadState.append) {
                 is LoadState.Error -> {
                     item(key = "Inline Error Message") {
-                        InlineErrorMessage(Modifier.fillParentMaxWidth(), lazyPagingItems)
+                        InlineErrorMessage(
+                            modifier = Modifier.fillParentMaxWidth(),
+                            retry = { lazyPagingItems.retry() }
+                        )
                     }
                 }
 
@@ -142,15 +147,15 @@ private fun LoadingOverlay(modifier: Modifier) {
 @Composable
 private fun InlineErrorMessage(
     modifier: Modifier,
-    lazyPagingItems: LazyPagingItems<ListEntry>
+    retry: () -> Unit
 ) {
     Box(modifier) {
         Column(
-            Modifier.padding(16.dp),
+            Modifier.padding(16.dp).align(Alignment.Center),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(stringResource(R.string.text_inline_error_message))
-            Button(onClick = { lazyPagingItems.retry() }) {
+            Button(onClick = retry) {
                 Text(stringResource(R.string.label_retry))
             }
         }
@@ -158,14 +163,21 @@ private fun InlineErrorMessage(
 }
 
 @Composable
-private fun ErrorMessage(modifier: Modifier) {
+private fun ErrorMessage(modifier: Modifier, retry: () -> Unit) {
     Box(modifier) {
-        Text(
-            text = stringResource(R.string.error_message_inital_load),
+        Column(
             modifier = Modifier
                 .padding(horizontal = 32.dp)
-                .align(Alignment.Center)
-        )
+                .align(Alignment.Center),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = stringResource(R.string.error_message_inital_load),
+            )
+            Button(onClick = retry) {
+                Text(stringResource(R.string.label_retry))
+            }
+        }
     }
 }
 
@@ -197,7 +209,7 @@ private fun PreviewListScreen() {
             lazyPagingItems = flowOf(
                 PagingData.from(
                     listOf(
-                        ListEntry(id =1, title = "Hello World", releaseDate =  LocalDate.now())
+                        ListEntry(id = 1, title = "Hello World", releaseDate = LocalDate.now())
                     )
                 )
             ).collectAsLazyPagingItems(),

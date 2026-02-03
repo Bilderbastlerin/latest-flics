@@ -17,7 +17,7 @@ internal class ListViewModel @Inject constructor(
     handle: SavedStateHandle,
     movieRepository: MovieRepository
 ) : ViewModel() {
-    val uiState = movieRepository.moviesPager
+    val uiState = movieRepository.moviesPager // movieRepository.cachedMoviesPager
         .map { pagingData ->
             pagingData.map {
                 ListEntry(
