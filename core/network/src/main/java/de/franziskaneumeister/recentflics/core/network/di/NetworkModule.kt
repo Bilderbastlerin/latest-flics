@@ -48,7 +48,7 @@ public abstract class DataModule {
                         val request: Request = chain.request()
                             .newBuilder()
                             .header("accept", "application/json")
-                            .header("Authorization", "Bearer ${BuildConfig.API_KEY}")
+                            .header("Authorization", "Bearer ${BuildConfig.API_TOKEN}")
                             .build()
                         chain.proceed(request)
                     }

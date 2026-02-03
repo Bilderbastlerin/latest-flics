@@ -21,11 +21,11 @@ android {
         val secretsFile = rootProject.file("local.properties")
         val properties = Properties()
         properties.load(secretsFile.inputStream())
-        val apiKey = properties.getProperty("api_key") ?: ""
+        val apiToken = properties.getProperty("api_token") ?: ""
         buildConfigField(
             type = "String",
-            name = "API_KEY",
-            value = apiKey
+            name = "API_TOKEN",
+            value = apiToken
         )
     }
 
